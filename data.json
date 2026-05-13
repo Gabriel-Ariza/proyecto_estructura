@@ -1,0 +1,38 @@
+[
+    {
+        "id_factura": 1,
+        "fecha": "15/04/2025:20:35",
+        "vendedor": "Luis Alfosno",
+        "cliente": "Isabella Maldonado",
+        "items": [
+            {
+                "producto": "Teclado Mecánico RGB",
+                "cantidad": 2,
+                "precio_unitario": 189900.0,
+                "subtotal": 379800.0
+            },
+            {
+                "producto": "Mouse Gamer Pro",
+                "cantidad": 1,
+                "precio_unitario": 85000.0,
+                "subtotal": 85000.0
+            }
+        ],
+        "total_venta": 464800.0
+    },
+    {
+        "id_factura": 2,
+        "fecha": "16/04/2025:14:20",
+        "vendedor": "Laura Torres",
+        "cliente": "Juan Pérez",
+        "items": [
+            {
+                "producto": "Monitor 24' 144Hz",
+                "cantidad": 1,
+                "precio_unitario": 850000.0,
+                "subtotal": 850000.0
+            }
+        ],
+        "total_venta": 850000.0
+    }
+]
