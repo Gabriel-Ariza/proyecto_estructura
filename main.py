@@ -3,6 +3,8 @@ import modules.inventario as inv
 import modules.ventas as vtas
 import modules.estadisticas as est
 import modules.algoritmos as ordenamiento
+import modules.busquedas as busqueda
+import modules.recursividad as recursividad
 import modules.reportes as rept
 from utils.manejo_json import cargar_datos
 from utils.fechas_conversiones import formatear_dinero
@@ -132,40 +134,36 @@ def menu_ordenamiento():
             break
 
 
+
 def menu_busqueda():
     while True:
         print("\n" + "="*66)
         print("MÓDULO 4: MÓDULOS DE BÚSQUEDA".center(66))
         print("="*66 + "\n")
-        print("\t[1] Búsqueda Iterativa (por ID, Producto o Vendedor)")
-        print("\t[2] Búsqueda Recursiva (por ID, Producto o Vendedor)")
-        print("\t[3] Búsqueda Binaria Iterativa por Monto Total (Requiere Orden previo)")
-        print("\t[4] Búsqueda Binaria Recursiva por Monto Total (Requiere Orden previo)")
-        print("\t[5] Regresar al Menú Principal")
+        print("\t[1] Búsqueda por ID (Producto - Vendedor - Factura)")
+        print("\t[2] Búsqueda Binaria por Monto Total (Factura)")
+        print("\t[3] Regresar al Menú Principal")
         print("\n" + "="*66)
         
-        opt = validar_entrada('\nIngrese una opción ---> ', tipo=int, min_val=1, max_val=5)
+        opt = validar_entrada('\nIngrese una opción ---> ', tipo=int, min_val=1, max_val=3)
         
         if opt == 1:
-            print("\n[*] Búsqueda Lineal Iterativa")
+            busqueda.controlador_busqueda_id()
         elif opt == 2:
-            print("\n[*] Búsqueda Lineal Recursiva")
+            busqueda.controlador_busqueda_montoFactura()
         elif opt == 3:
-            print("\n[*] Búsqueda Binaria Iterativa")
-        elif opt == 4:
-            print("\n[*] Búsqueda Binaria Recursiva")
-        else:
             break
+
 
 
 def menu_recursividad():
     while True:
         print("\n" + "="*66)
-        print("MÓDULO 5: RECURSIVIDAD EXPLÍCITA Y DIDÁCTICA".center(66))
+        print("MÓDULO 5: RECURSIVIDAD EXPLÍCITA".center(66))
         print("="*66 + "\n")
-        print("\t[1] Sumar Totales de Venta (Recursión pura)")
-        print("\t[2] Contar Ventas que Superen un Umbral Económico")
-        print("\t[3] Búsqueda Recursiva por ID con Backtracking Simple")
+        print("\t[1] Calcular Suma Total de Ventas (Recursivo)")
+        print("\t[2] Contar Ventas sobre un Umbral Económico")
+        print("\t[3] Búsqueda por ID con Retroceso (Backtracking)")
         print("\t[4] Cálculo de Factorial para Fórmula Estadística")
         print("\t[5] Regresar al Menú Principal")
         print("\n" + "="*66)
@@ -173,13 +171,13 @@ def menu_recursividad():
         opt = validar_entrada('\nIngrese una opción ---> ', tipo=int, min_val=1, max_val=5)
         
         if opt == 1:
-            print("\n[*] Sumar Totales (Recursión)")
+            recursividad.sumar_ventas_recursivo()
         elif opt == 2:
-            print("\n[*] Contar Ventas con Umbral")
+            recursividad.contar_ventas_umbral_recursivo()
         elif opt == 3:
-            print("\n[*] Búsqueda Recursiva por ID")
+            recursividad.buscar_id_backtracking()
         elif opt == 4:
-            print("\n[*] Cálculo de Factorial")
+            recursividad.factorial_didactico()
         else:
             break
 

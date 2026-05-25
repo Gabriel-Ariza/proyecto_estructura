@@ -5,6 +5,7 @@ from utils.fechas_conversiones import parsear_fecha
 
 
 def ordenar_burbuja_monto(ventas, ascendente=True):
+
     #Ordena las ventas por el campo total_venta usando Burbuja
     n = len(ventas)
     pasos = 0
@@ -30,8 +31,9 @@ def ordenar_burbuja_monto(ventas, ascendente=True):
 
 
 
+
 def ordenar_insercion_fecha(ventas, cronologico=True):
-    #Ordena las ventas por el campo fecha usando Inserción pura.
+    #Ordena las ventas por el campo fecha usando Inserción.
     pasos = 0
     intercambios = 0
     n = len(ventas)
@@ -60,6 +62,9 @@ def ordenar_insercion_fecha(ventas, cronologico=True):
         
     print(f"[MÉTRICAS] Pasos/Comparaciones: {pasos} | Desplazamientos/Intercambios: {intercambios}")
     return ventas
+
+
+
 
 
 def ordenar_seleccion_producto(ventas, ascendente=True):
@@ -113,7 +118,6 @@ def mostrar_resultado_ordenado(ventas_ordenadas):
 
 
 def ejecutar_ordenamiento_monto():
-    #Controlador que maneja la sub-interfaz, carga la data y ejecuta Burbuja.
     data = cargar_datos()
     if not data["ventas"]:
         print("\n[INFO] No hay registros de ventas para poder realizar ordenamientos.")
@@ -126,7 +130,6 @@ def ejecutar_ordenamiento_monto():
     asc = (dir_opt == 1)
     
     ventas_copia = list(data["ventas"])
-    limpiar()
     res = ordenar_burbuja_monto(ventas_copia, ascendente=asc)
     mostrar_resultado_ordenado(res)
 
@@ -135,7 +138,6 @@ def ejecutar_ordenamiento_monto():
 
 
 def ejecutar_ordenamiento_fecha():
-    #Controlador que maneja la sub-interfaz, carga la data y ejecuta Inserción.
     data = cargar_datos()
     if not data["ventas"]:
         print("\n[INFO] No hay registros de ventas para poder realizar ordenamientos.")
@@ -148,7 +150,6 @@ def ejecutar_ordenamiento_fecha():
     cron = (dir_opt == 1)
     
     ventas_copia = list(data["ventas"])
-    limpiar()
     res = ordenar_insercion_fecha(ventas_copia, cronologico=cron)
     mostrar_resultado_ordenado(res)
 
@@ -157,7 +158,6 @@ def ejecutar_ordenamiento_fecha():
 
 
 def ejecutar_ordenamiento_producto():
-    #Controlador que maneja la sub-interfaz, carga la data y ejecuta Selección.
     data = cargar_datos()
     if not data["ventas"]:
         print("\n[INFO] No hay registros de ventas para poder realizar ordenamientos.")
@@ -170,6 +170,5 @@ def ejecutar_ordenamiento_producto():
     asc = (dir_opt == 1)
     
     ventas_copia = list(data["ventas"])
-    limpiar()
     res = ordenar_seleccion_producto(ventas_copia, ascendente=asc)
     mostrar_resultado_ordenado(res)
