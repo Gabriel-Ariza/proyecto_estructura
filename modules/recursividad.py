@@ -1,4 +1,5 @@
-from utils.entradas import validar_entrada, limpiar
+from utils.entradas import validar_entrada
+from utils.fechas_conversiones import formatear_dinero
 from utils.manejo_json import cargar_datos
 
 
@@ -11,6 +12,22 @@ def sumar_ventas_recursivo(lista_ventas, idx):
         
     # Sumamos el monto actual con lo que devuelvan las funciones de adelante
     return lista_ventas[idx].get("total_venta", 0.0) + sumar_ventas_recursivo(lista_ventas, idx + 1)
+
+
+
+def controlador_sumar_ventas():
+    print("\n--- SUMATORIA RECURSIVA DE CAJA ---")
+    data = cargar_datos()
+    lista_ventas = data.get("ventas", [])
+    
+    if not lista_ventas:
+        print("No se registran facturas en el sistema para realizar la suma.")
+        return
+        
+    total = sumar_ventas_recursivo(lista_ventas, 0)
+    total_formateado = formatear_dinero(total)
+    print(f"\nEl total neto recaudado en ventas es: ${total_formateado}")
+
 
 
 
@@ -29,6 +46,23 @@ def contar_ventas_umbral_recursivo(lista_ventas, idx, umbral):
         
     # Sumamos nuestro acumulador (1 o 0) al resultado de las siguientes posiciones
     return acumulador + contar_ventas_umbral_recursivo(lista_ventas, idx + 1, umbral)
+
+
+
+def controlador_contar_umbral():
+    print("\n--- CONTEO DE FACTURAS POR UMBRAL ECONÓMICO ---")
+    data = cargar_datos()
+    lista_ventas = data.get("ventas", [])
+    
+    if not lista_ventas:
+        print("No hay ventas disponibles para analizar.")
+        return
+        
+    umbral = validar_entrada("Ingrese el valor mínimo del umbral a evaluar: ", tipo=float, min_val=0.0)
+    umbral_formateado = formatear_dinero(umbral)
+    cantidad = contar_ventas_umbral_recursivo(lista_ventas, 0, umbral)
+    
+    print(f"\nCantidad de facturas que superan los {umbral_formateado}: {cantidad} registro(s).")
 
 
 
@@ -102,10 +136,42 @@ def buscar_id_backtracking(data, criterio_id):
 
 
 
+def controlador_backtracking():
+    print("\n--- EXPLORACIÓN CON RETROCESO (BACKTRACKING) ---")
+    data = cargar_datos()
+    
+    id_buscado = validar_entrada("Ingrese el ID único a rastrear en las colecciones: ", tipo=int, min_val=1)
+    hallado, ruta = buscar_id_backtracking(data, id_buscado)
+    
+    print("\n" + "-"*55)
+    print("LOG DE RUTAS RECURSIVAS".center(55))
+    print("-"*55)
+    for paso in ruta:
+        print(f" -> {paso}")
+    print("-"*55)
+    
+    if hallado:
+        print(f"Operación exitosa. El ID {id_buscado} existe y el camino fue resuelto.")
+    else:
+        print(f"El ID {id_buscado} no se localizó en ninguna estructura.")
 
 
-def factorial_didactico(numero):
-    # en matemática el factorial de 0 o 1 es siempre 1
+
+
+
+def factorial_didactico(numero=None):
+
+    # Ejecutamos solo en la primera llamada para captar el numero
+    if numero is None:
+        print("\n--- CÁLCULO DE FACTORIAL (FÓRMULA ESTADÍSTICA) ---")
+        numero_capturado = validar_entrada("Ingrese un número entero (sugerido 12): ", tipo=int, min_val=0, max_val=20)
+        
+        # llamamos la recursion con el numero del usuario
+        resultado_final = factorial_didactico(numero_capturado)
+        
+        print(f"\nEl resultado factorial de {numero_capturado} es: {resultado_final:,}")
+        return
+
     if numero == 0 or numero == 1:
         return 1
         

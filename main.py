@@ -171,11 +171,11 @@ def menu_recursividad():
         opt = validar_entrada('\nIngrese una opción ---> ', tipo=int, min_val=1, max_val=5)
         
         if opt == 1:
-            recursividad.sumar_ventas_recursivo()
+            recursividad.controlador_sumar_ventas()
         elif opt == 2:
-            recursividad.contar_ventas_umbral_recursivo()
+            recursividad.controlador_contar_umbral()
         elif opt == 3:
-            recursividad.buscar_id_backtracking()
+            recursividad.controlador_backtracking()
         elif opt == 4:
             recursividad.factorial_didactico()
         else:

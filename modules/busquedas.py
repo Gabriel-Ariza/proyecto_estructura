@@ -1,4 +1,4 @@
-from utils.entradas import validar_entrada, limpiar
+from utils.entradas import validar_entrada
 from utils.manejo_json import cargar_datos
 
 
